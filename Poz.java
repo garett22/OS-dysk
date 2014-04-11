@@ -1,7 +1,27 @@
-class Poz {
-	// Pozycja g≥owicy lub lokalizacja danych
-	// moøna zaniechaÊ talerz
+Ôªøclass Poz implements Comparable<Poz> {
+	// Pozycja g≈Çowicy lub lokalizacja danych
+	// mo≈ºna zaniechaƒá talerz
 	int sciezka; // 0..39
 	int sektor; // 0..1023
-	// dysk n*640MB jeúli blok ma 16kB
+	static int MAX1 = 40;
+	static int MAX2 = 1024;
+
+	// dysk n*640MB je≈õli blok ma 16kB
+
+	Poz(int sciezka, int sektor) {
+		this.sciezka = sciezka;
+		this.sektor = sektor;
+	}
+
+	public int compareTo(Poz p) {
+		if (sciezka != p.sciezka)
+			return ((Integer) sciezka).compareTo(p.sciezka);
+		else
+			return ((Integer) sektor).compareTo(p.sektor);
+
+	}
+	
+	public boolean equals(Poz p){
+		return sciezka==p.sciezka&&sektor==p.sektor;
+	}
 }
