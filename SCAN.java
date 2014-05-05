@@ -1,12 +1,13 @@
-Ôªøimport java.util.ArrayList;
+import java.util.ArrayList;
 
-public class CSCAN {
+public class SCAN {
 	ArrayList<Request> cpu = new ArrayList<Request>();
-	Poz glowica; // pozycja g≈Çowicy
-	int s1 = 0; // suma ruch√≥w po ≈õcie≈ºkach
-	int s2 = 0; // suma ruch√≥w po sektorach
+	Poz glowica; // pozycja g≥owicy
+	int s1 = 0; // suma ruchÛw po úcieøkach
+	int s2 = 0; // suma ruchÛw po sektorach
+	boolean kierunek = true; // 1-inc, 0-dec
 
-	CSCAN() {
+	SCAN() {
 		glowica = new Poz(0, 0);
 	}
 
@@ -15,11 +16,14 @@ public class CSCAN {
 	}
 
 	void wykonaj() {
-		if (glowica.sciezka >= Poz.MAX1)
-			glowica.sciezka = 0;
-		while (glowica.sektor < Poz.MAX2) {
+		// TODO jazda g≥owicπ z powrotem
+		if (glowica.sciezka > Poz.MAX1)
+			kierunek = false;
+		else if (glowica.sciezka < 0)
+			kierunek = true;
+		while (glowica.sektor >= 0 && glowica.sektor <= Poz.MAX2) {
 			Request r = next();
-			// je≈õli jest zadanie, to wykonaj, jak nie, to nastƒôpny sektor
+			// jeúli jest zadanie, to wykonaj, jak nie, to nastÍpny sektor
 			if (r != null)
 				cpu.remove(r);
 			// s1 += (glowica.sciezka >= r.p.sciezka) ? (glowica.sciezka -
@@ -31,13 +35,16 @@ public class CSCAN {
 			glowica.sektor++; // nast sektor
 			s2++;
 		}
-		// s2 += Poz.MAX2 + 1; // by≈Ço sumowane...
+		// s2 += Poz.MAX2 + 1; // by≥o sumowane...
 		glowica.sektor = 0; // sektory od nowa
-		glowica.sciezka++; // nast ≈õcie≈ºka
+		if (kierunek) // nast úcieøka
+			glowica.sciezka++;
+		else
+			glowica.sciezka--;
 		s1++;
 	}
 
-	private Request next() {
+	private Request next() { 
 		// wybierz kolejny element jesli jest w tym miejscu
 		Request r = null;
 		for (int i = 0; i < cpu.size(); i++)

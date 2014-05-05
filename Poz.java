@@ -20,8 +20,12 @@
 			return ((Integer) sektor).compareTo(p.sektor);
 
 	}
-	
-	public boolean equals(Poz p){
-		return sciezka==p.sciezka&&sektor==p.sektor;
+
+	public boolean equals(Poz p) {
+		return sciezka == p.sciezka && sektor == p.sektor;
+	}
+
+	public String toString() {
+		return sciezka + " " + sektor;
 	}
 }
