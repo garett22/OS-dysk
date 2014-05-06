@@ -1,0 +1,2 @@
+﻿Na użytek programu czas mierzymy obrotami talerza (a dokładniej odwiedzonymi sektorami), ponieważ dla 100 żądań i 1024 sektorów na ścieżkę, suma ruchów po sektorach (s2) wynosi conajmniej 2000 (SSTF). Jest to wystarczająco precyzyjne aby traktować to jako zegar.
+Priorytet w klasie Request to poledo którego zapisujemy deadline. Wartość będzie sprawdzana z sumą ruchów po sektorach.
